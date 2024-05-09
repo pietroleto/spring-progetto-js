@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import it.corso.dao.CategoriaDao;
 import it.corso.dto.AddCategoriaDTO;
 import it.corso.dto.CategoriaShowDTO;
-import it.corso.dto.UtenteAggiornamentoDTO;
 import it.corso.model.Categoria;
 import it.corso.model.NomeCategoria;
 import it.corso.model.Ruolo;
@@ -26,13 +25,15 @@ public class CategoriaServiceImpl implements CategoriaService {
 	private CategoriaDao categoriaDao;
 
 	@Override
-	public Categoria getCategoriaById(int id) {
+	public CategoriaShowDTO getCategoriaById(int id) {
 		Optional<Categoria> categoriaOption = categoriaDao.findById(id);
-		
-		if (categoriaOption.isPresent()) {
-			return categoriaOption.get();
-		}
-		return null;
+	    
+	    if (categoriaOption.isPresent()) {
+	        Categoria categoria = categoriaOption.get();
+	        return modelMapper.map(categoria, CategoriaShowDTO.class); //sto utilizzando questo approccio perché quando ritornavo direttamente utenteOption.get() si generava un loop sulla selezione dei ruoli
+	    }
+	    
+	    return null;
 	}
 
 	@Override

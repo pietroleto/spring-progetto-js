@@ -8,7 +8,7 @@ import it.corso.model.Categoria;
 import jakarta.validation.Valid;
 
 public interface CategoriaService {
-	Categoria getCategoriaById(int id);
+	CategoriaShowDTO getCategoriaById(int id);
 	List<CategoriaShowDTO> getCategorie();
 	void creaCategoria(AddCategoriaDTO categoria);
 	void deleteCategoriaById(int id);

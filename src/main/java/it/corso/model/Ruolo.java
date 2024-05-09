@@ -27,7 +27,7 @@ public class Ruolo {
 	
 	@Column(name = "TIPOLOGIA")
 	@Enumerated(EnumType.STRING)
-	private Tipologia tipologia;
+	private NomeRuolo tipologia;
 	
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -50,10 +50,10 @@ public class Ruolo {
 		this.id = id;
 	}
 
-	public Tipologia getTipologia() {
+	public NomeRuolo getTipologia() {
 		return tipologia;
 	}
-	public void setTipologia(Tipologia tipologia) {
+	public void setTipologia(NomeRuolo tipologia) {
 		this.tipologia = tipologia;
 	}
 

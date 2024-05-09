@@ -43,41 +43,35 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	// non si dovrebbe utilizzare questo approccio perché si creerebbe un errore quando va a selezionare i ruoli, si dovrebbe fare con il model mapper
-	public Utente getUserById(int id) {
-		Optional<Utente> utenteOption = userDao.findById(id);
-		
-		if (utenteOption.isPresent()) {
-			return utenteOption.get();
-		}
-		return null;
+	public UtenteShowDTO getUserById(int id) {
+	    Optional<Utente> utenteOption = userDao.findById(id);
+	    
+	    if (utenteOption.isPresent()) {
+	        Utente utente = utenteOption.get();
+	        return modelMapper.map(utente, UtenteShowDTO.class); //sto utilizzando questo approccio perché quando ritornavo direttamente utenteOption.get() si generava un loop sulla selezione dei ruoli
+	    }
+	    
+	    return null;
 	}
 
 	@Override
 	public void updateUserData(UtenteAggiornamentoDTO user) {
 		try {
-			Utente utenteDb = userDao.findByEmail(user.getEmail());
-			
-			if (utenteDb != null) {
-				utenteDb.setNome(user.getNome());
-				utenteDb.setCognome(user.getCognome());
-				utenteDb.setEmail(user.getEmail());
-				
-				/*List<Ruolo> ruoliUtente = new ArrayList<>();
-				Optional<Ruolo> ruoloDb = ruoloDao.findById(user.getIdRuolo());
-				
-				if (ruoloDb.isPresent()) {
-					Ruolo ruolo = ruoloDb.get();
-					ruolo.setId(user.getIdRuolo());
-					
-					ruoliUtente.add(ruolo);
-					utenteDb.setRuoli(ruoliUtente);
-				}*/
-				
-				userDao.save(utenteDb);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	        Optional<Utente> optionalUtenteDb = userDao.findById(user.getId());
+	        
+	        if (optionalUtenteDb.isPresent()) {
+	            Utente utenteDb = optionalUtenteDb.get();
+	            
+	            utenteDb.setNome(user.getNome());
+	            utenteDb.setCognome(user.getCognome());
+	            utenteDb.setEmail(user.getEmail());
+	            utenteDb.setRuoli(user.getRuoli());
+	            
+	            userDao.save(utenteDb);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	@Override
@@ -134,8 +128,6 @@ public class UserServiceImpl implements UserService {
 		//fingiamo che la password sia "ciao"
 		//getPassword di utenteLoginRequestDTO mi recupera questa password e la setto su utente tramite il metodo setPassword
 		utente.setPassword(utenteLoginRequestDTO.getPassword());
-		
-		System.out.println(utente.getPassword());
 		
 		String passwordHash = DigestUtils.sha256Hex(utente.getPassword());
 		

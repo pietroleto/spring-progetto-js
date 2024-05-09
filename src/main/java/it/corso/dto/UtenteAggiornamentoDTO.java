@@ -1,11 +1,15 @@
 package it.corso.dto;
 
+import java.util.List;
+
+import it.corso.model.Ruolo;
+
 public class UtenteAggiornamentoDTO {
 	private int id;
 	private String nome;
 	private String cognome;
 	private String email;
-	//private int idRuolo;
+	private List<Ruolo> ruoli;
 	
 	public int getId() {
 		return id;
@@ -35,10 +39,11 @@ public class UtenteAggiornamentoDTO {
 		this.email = email;
 	}
 	
-	/*public int getIdRuolo() {
-		return idRuolo;
+	
+	public List<Ruolo> getRuoli() {
+		return ruoli;
 	}
-	public void setIdRuolo(int idRuolo) {
-		this.idRuolo = idRuolo;
-	}*/
+	public void setRuoli(List<Ruolo> ruoli) {
+		this.ruoli = ruoli;
+	}
 }

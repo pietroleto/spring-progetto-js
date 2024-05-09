@@ -16,7 +16,7 @@ public interface UserService {
 	void userRegistration(UserRegisterDTO user);
 	
 	// ritorno un utente in base all'id
-	Utente getUserById(int id);
+	UtenteShowDTO getUserById(int id);
 	
 	// aggiornamento dati utente
 	void updateUserData(UtenteAggiornamentoDTO user);

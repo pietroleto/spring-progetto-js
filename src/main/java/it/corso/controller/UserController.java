@@ -188,6 +188,7 @@ public class UserController {
 		map.put("email", email);
 		map.put("nome", infoUtente.getNome());
 		map.put("cognome", infoUtente.getCognome());
+		map.put("id", infoUtente.getId());
 		
 		List<String> ruoli = new ArrayList<>();
 		for (Ruolo ruolo : infoUtente.getRuoli()) {

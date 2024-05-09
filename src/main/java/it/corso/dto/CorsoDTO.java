@@ -1,11 +1,19 @@
 package it.corso.dto;
 
 public class CorsoDTO {
+	private int id;
 	private String nomeCorso;
 	private String descrizioneBreve;
 	private String descrizioneCompleta;
 	private int durata;
 	private int idCategoria;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getNomeCorso() {
 		return nomeCorso;

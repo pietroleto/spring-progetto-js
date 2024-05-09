@@ -37,4 +37,46 @@ public class Corso {
 		referencedColumnName = "ID_CA"
 	)
 	private Categoria categoria;
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNomeCorso() {
+		return nomeCorso;
+	}
+	public void setNomeCorso(String nomeCorso) {
+		this.nomeCorso = nomeCorso;
+	}
+
+	public String getDescrizioneBreve() {
+		return descrizioneBreve;
+	}
+	public void setDescrizioneBreve(String descrizioneBreve) {
+		this.descrizioneBreve = descrizioneBreve;
+	}
+
+	public String getDescrizioneCompleta() {
+		return descrizioneCompleta;
+	}
+	public void setDescrizioneCompleta(String descrizioneCompleta) {
+		this.descrizioneCompleta = descrizioneCompleta;
+	}
+
+	public String getDurata() {
+		return durata;
+	}
+	public void setDurata(String durata) {
+		this.durata = durata;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 }
